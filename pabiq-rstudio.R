@@ -121,11 +121,14 @@ other_conditions <- as.character(realdata$ProszÄ..wymieniÄ...jakie.inne.chorob
 # A: TAK, NIE
 lang_contact <- as.factor(realdata$Czy.dziecko.ma.regularny.kontakt.z.osobami.mĂłwiÄ.cymi.do.niego.w.jÄ.zyku.innym.niĹĽ.polski..np..niania..nauczyciel..dziadkowie....br.ProszÄ..zaznaczyÄ...TAK..rĂłwnieĹĽ.wtedy..kiedy.dziecko.ma.kontakt.ze.Ĺ.lÄ.skim..kaszubskim.lub.jakÄ.Ĺ..regionalnÄ..odmianÄ..jÄ.zyka.polskiego.)
 
-# languages
+# child's languages
+# Q: Proszę wybrać wszystkie języki (poza polskim), które dziecko regularnie słyszy w swoim otoczeniu. Proszę wypełnić tabelę również wtedy, kiedy dziecko ma kontakt ze śląskim, kaszubskim lub jakąś odmianą języka polskiego.
 lang_1 <- as.character(realdata$X2.11.1.inny.jÄ.zyk.1)
 lang_2 <- as.character(realdata$X2.11.1.inny.jÄ.zyk.2)
 lang_3 <- as.character(realdata$X2.11.1.inny.jÄ.zyk.3)
 
+# Q: Jak często dziecko miało kontakt z każdym z tych języków do tej pory?
+# A: rzadko, czasami, często, zawsze
 contact <- as.character(realdata$Jak.czÄ.sto.dziecko.miaĹ.o.kontakt.z.kaĹĽdym.z.tych.jÄ.zykĂłw.do.tej.pory.)
 
 freq_contact_pl <- vector()
@@ -162,6 +165,7 @@ for (el in contact) {
     if (temp[[1]][26] == 0 & temp[[1]][28] == 0 & temp[[1]][30] == 0 & temp[[1]][32] == 0) {freq_contact_lang_3 <- append(freq_contact_lang_3, NA)}
   } } # end freq_langs
 
+# Q: W jakim wieku dziecko miało pierwszy kontakt z danym językiem? (w miesiącach)
 first_contacts <- as.character(realdata$W.jakim.wieku.dziecko.miaĹ.o.pierwszy.kontakt.z.danym.jÄ.zykiem...i..w.miesiÄ.cach...i.)
 first_contact_pl <- vector()
 first_contact_lang_1 <- vector()
@@ -175,8 +179,12 @@ for (el in first_contacts) {
   first_contact_lang_3 <- append(first_contact_lang_3, as.integer(str_sub(temp[[1]][4], 9, -1)))
 } # end first contact
 
+# Q: Kto jest głównym opiekunem dziecka?
+# A: matka, ojciec, babcia, dziadek, niania, nauczyciel(ka), inne
 parent_1 <- as.factor(realdata$Kto.jest.gĹ.Ăłwnym.opiekunem.dziecka.)
 
+# Q: Język, w którym główny opiekun mówi do dziecka:
+# A: nigdy, rzadko, czasami, często, zawsze
 lang_parent_1_child <- as.character(realdata$JÄ.zyk..w.ktĂłrym..b.gĹ.Ăłwny.opiekun..b..mĂłwi..b.do.dziecka..b..)
 lang_parent_1_child_pl <- vector()
 lang_parent_1_child_lang_1 <- vector()
@@ -216,6 +224,8 @@ for (el in lang_parent_1_child) {
     if (temp[[1]][32] == 0 & temp[[1]][34] == 0 & temp[[1]][36] == 0 & temp[[1]][38] == 0 & temp[[1]][40] == 0) {lang_parent_1_child_lang_3 <- append(lang_parent_1_child_lang_3, NA)}
   } } # end lang_parent_1_child
 
+# Q: Język, w którym dziecko mówi do głównego opiekuna:
+# A: nigdy, rzadko, czasami, często, zawsze
 lang_child_parent_1 <- as.character(realdata$JÄ.zyk..w.ktĂłrym..b.dziecko..b..mĂłwi..b.do.gĹ.Ăłwnego.opiekuna..b..)
 lang_child_parent_1_pl <- vector()
 lang_child_parent_1_lang_1 <- vector()
@@ -255,10 +265,16 @@ for (el in lang_child_parent_1) {
     if (temp[[1]][32] == 0 & temp[[1]][34] == 0 & temp[[1]][36] == 0 & temp[[1]][38] == 0 & temp[[1]][40] == 0) {lang_child_parent_1_lang_3 <- append(lang_child_parent_1_lang_3, NA)}
   } } # end lang_child_parent_1
 
+# Q: Czy główny opiekun samodzielnie wychowuje dziecko?
+# A: TAK, NIE
 only_parent <- as.factor(realdata$Czy.gĹ.Ăłwny.opiekun.jest.jedynym.opiekunem.wychowujÄ.cym.dziecko.)
 
+# Q: Kto jest drugim opiekunem dziecka?
+# A: matka, ojciec, babcia, dziadek, niania, nauczyciel(ka), inne
 parent_2 <- as.factor(realdata$Kto.jest.drugim.opiekunem.dziecka.)
 
+# Q: Język, w którym drugi opiekun mówi do dziecka:
+# A: nigdy, rzadko, czasami, często, zawsze
 lang_parent_2_child <- as.character(realdata$JÄ.zyk..w.ktĂłrym..b.drugi.opiekun..b..mĂłwi..b.do.dziecka..b..)
 lang_parent_2_child_pl <- vector()
 lang_parent_2_child_lang_1 <- vector()
@@ -298,6 +314,8 @@ for (el in lang_parent_2_child) {
     if (temp[[1]][32] == 0 & temp[[1]][34] == 0 & temp[[1]][36] == 0 & temp[[1]][38] == 0 & temp[[1]][40] == 0) {lang_parent_2_child_lang_3 <- append(lang_parent_2_child_lang_3, NA)}
   } } # end lang_parent_2_child
 
+# Q: Język, w którym dziecko mówi do drugiego opiekuna:
+# A: nigdy, rzadko, czasami, często, zawsze
 lang_child_parent_2 <- as.character(realdata$JÄ.zyk..w.ktĂłrym..b.dziecko..b..mĂłwi..b.do.drugiego.opiekuna..b..)
 lang_child_parent_2_pl <- vector()
 lang_child_parent_2_lang_1 <- vector()
@@ -337,10 +355,16 @@ for (el in lang_child_parent_2) {
     if (temp[[1]][32] == 0 & temp[[1]][34] == 0 & temp[[1]][36] == 0 & temp[[1]][38] == 0 & temp[[1]][40] == 0) {lang_child_parent_2_lang_3 <- append(lang_child_parent_2_lang_3, NA)}
   } } # end lang_child_parent_2
 
+# Q: Czy są jeszcze inni dorośli, którzy regularnie opiekują się dzieckiem przez przynajmniej kilkanaście godzin tygodniowo? (np. niania/babcia opiekująca się dzieckiem w czasie pracy rodziców)
+# A: TAK, jest 1 dodatkowy opiekun; TAK, jest 2 dodatkowych opiekunów; TAK, jest więcej niż 2 dodatkowych opiekunów; NIE, nie ma dodatkowych opiekunów
 extra_caregivers <- as.factor(realdata$Czy.sÄ..jeszcze.inni.doroĹ.li..ktĂłrzy.regularnie.opiekujÄ..siÄ..dzieckiem.przez.przynajmniej.kilkanaĹ.cie.godzin.tygodniowo...np..niania.babcia.opiekujÄ.ca.siÄ..dzieckiem.w.czasie.pracy.rodzicĂłw.)
 
+# Q: Kim jest dla dziecka dodatkowy opiekun?
+# A: matka, ojciec, babcia, dziadek, niania, nauczyciel(ka), inne
 extra_1 <- as.factor(realdata$Kim.jest.dla.dziecka.dodatkowy.opiekun.)
 
+# Q: Język, w którym dodatkowy opiekun mówi do dziecka:
+# A: nigdy, rzadko, czasami, często, zawsze
 lang_extra_1_child <- as.character(realdata$JÄ.zyk..w.ktĂłrym..b.gĹ.Ăłwny.opiekun..b..mĂłwi..b.do.dziecka..b..)
 lang_extra_1_child_pl <- vector()
 lang_extra_1_child_lang_1 <- vector()
@@ -380,6 +404,8 @@ for (el in lang_extra_1_child) {
     if (temp[[1]][32] == 0 & temp[[1]][34] == 0 & temp[[1]][36] == 0 & temp[[1]][38] == 0 & temp[[1]][40] == 0) {lang_extra_1_child_lang_3 <- append(lang_extra_1_child_lang_3, NA)}
   } } # end lang_extra_1_child
 
+# Q: Język, w którym dziecko mówi do opiekuna dodatkowego:
+# A: nigdy, rzadko, czasami, często, zawsze
 lang_child_extra_1 <- as.character(realdata$JÄ.zyk..w.ktĂłrym..b.dziecko..b..mĂłwi..b.do.gĹ.Ăłwnego.opiekuna..b..)
 lang_child_extra_1_pl <- vector()
 lang_child_extra_1_lang_1 <- vector()
@@ -419,8 +445,12 @@ for (el in lang_child_extra_1) {
     if (temp[[1]][32] == 0 & temp[[1]][34] == 0 & temp[[1]][36] == 0 & temp[[1]][38] == 0 & temp[[1]][40] == 0) {lang_child_extra_1_lang_3 <- append(lang_child_extra_1_lang_3, NA)}
   } } # end lang_child_extra_1
 
+# Q: Kim jest dla dziecka dodatkowy opiekun 2?
+# A: matka, ojciec, babcia, dziadek, niania, nauczyciel(ka), inne
 extra_2 <- as.factor(realdata$Kim.jest.dla.dziecka.dodatkowy.opiekun.2.)
 
+# Q: Język, w którym dodatkowy opiekun 2 mówi do dziecka:
+# A: nigdy, rzadko, czasami, często, zawsze
 lang_extra_2_child <- as.character(realdata$JÄ.zyk..w.ktĂłrym..b.gĹ.Ăłwny.opiekun..b..mĂłwi..b.do.dziecka..b..)
 lang_extra_2_child_pl <- vector()
 lang_extra_2_child_lang_1 <- vector()
@@ -460,6 +490,8 @@ for (el in lang_extra_2_child) {
     if (temp[[1]][32] == 0 & temp[[1]][34] == 0 & temp[[1]][36] == 0 & temp[[1]][38] == 0 & temp[[1]][40] == 0) {lang_extra_2_child_lang_3 <- append(lang_extra_2_child_lang_3, NA)}
   } } # end lang_extra_2_child
 
+# Q: Język, w którym dziecko mówi do opiekuna dodatkowego:
+# A: nigdy, rzadko, czasami, często, zawsze
 lang_child_extra_2 <- as.character(realdata$JÄ.zyk..w.ktĂłrym..b.dziecko..b..mĂłwi..b.do.gĹ.Ăłwnego.opiekuna..b..)
 lang_child_extra_2_pl <- vector()
 lang_child_extra_2_lang_1 <- vector()
@@ -500,6 +532,8 @@ for (el in lang_child_extra_2) {
     if (temp[[1]][32] == 0 & temp[[1]][34] == 0 & temp[[1]][36] == 0 & temp[[1]][38] == 0 & temp[[1]][40] == 0) {lang_child_extra_2_lang_3 <- append(lang_child_extra_2_lang_3, NA)}
   } } # end lang_child_extra_2
 
+# Q: Język, w którym rodzeństwo mówi do dziecka:
+# A: nigdy, rzadko, czasami, często, zawsze
 lang_siblings_child <- as.character(realdata$JÄ.zyk..w.ktĂłrym..b.gĹ.Ăłwny.opiekun..b..mĂłwi..b.do.dziecka..b..)
 lang_siblings_child_pl <- vector()
 lang_siblings_child_lang_1 <- vector()
@@ -539,6 +573,8 @@ for (el in lang_siblings_child) {
     if (temp[[1]][32] == 0 & temp[[1]][34] == 0 & temp[[1]][36] == 0 & temp[[1]][38] == 0 & temp[[1]][40] == 0) {lang_siblings_child_lang_3 <- append(lang_siblings_child_lang_3, NA)}
   } } # end lang_siblings_child
 
+# Q: Język, w którym dziecko mówi do rodzeństwa:
+# A: nigdy, rzadko, czasami, często, zawsze
 lang_child_siblings <- as.character(realdata$JÄ.zyk..w.ktĂłrym..b.dziecko..b..mĂłwi..b.do.gĹ.Ăłwnego.opiekuna..b..)
 lang_child_siblings_pl <- vector()
 lang_child_siblings_lang_1 <- vector()
@@ -579,34 +615,69 @@ for (el in lang_child_siblings) {
     if (temp[[1]][32] == 0 & temp[[1]][34] == 0 & temp[[1]][36] == 0 & temp[[1]][38] == 0 & temp[[1]][40] == 0) {lang_child_siblings_lang_3 <- append(lang_child_siblings_lang_3, NA)}
   } } # end lang_child_siblings
 
+# Q: Język, w którym główny opiekun zwraca się do dziecka:
+# A: tylko język polski; język polski z niektórymi słowami i zwrotami w innym języku; mniej więcej równe proporcje języka polskiego i innego języka; inny język z niektórymi słowami i zwrotami w języku polskim; tylko inny język
 lang_parent_uses <- as.factor(realdata$JÄ.zyk..w.ktĂłrym..b.gĹ.Ăłwny.opiekun..b..zwraca.siÄ...b.do.dziecka..b..)
 
+# Q: Język, w którym rozmawiają członkowie rodziny:
+# A: tylko język polski; język polski z niektórymi słowami i zwrotami w innym języku; mniej więcej równe proporcje języka polskiego i innego języka; inny język z niektórymi słowami i zwrotami w języku polskim; tylko inny język
 lang_family_uses <- as.factor(realdata$JÄ.zyk..w.ktĂłrym.rozmawiajÄ...b.czĹ.onkowie.rodziny..b..)
 
+# Q: Czy dziecko regularnie uczęszcza do przedszkola/szkoły?
+# A: TAK, NIE
+# TODO
+
+# Q: Ile dni tygodniowo dziecko uczęszcza do przedszkola/szkoły?
+# A: 1, 2, 3, 4, 5
+# TODO
+
+# Q: Ile godzin dziennie dziecko spędza w przedszkolu/szkole?
+# TODO
+
+# Q: Kraj urodzenia głównego opiekuna:
 birth_country_parent_1 <- as.factor(realdata$Kraj.urodzenia.gĹ.Ăłwnego.opiekuna.)
 birth_region_parent_1 <- as.factor(tolower(realdata$WojewĂłdztwo.Region.urodzenia.gĹ.Ăłwnego.opiekuna.))
 birth_town_parent_1 <- as.character(tolower(realdata$MiejscowoĹ.Ä..urodzenia.gĹ.Ăłwnego.opiekuna.))
 
+# Q: Czy główny opiekun obecnie pracuje?
+# A: tak, w pełnym wymiarze godzin; tak, w niepełnym wymiarze godzin; nie, jest na urlopie rodzicielskim; nie pracuje zawodowo
 employment_parent_1 <- as.factor(realdata$Czy.gĹ.Ăłwny.opiekun.obecnie.pracuje.)
 
+# Q: Wykonywany zawód głównego opiekuna:
+# Q: Ostatni zawód głównego opiekuna:
 current_job_parent_1 <- as.character(realdata$Wykonywany.zawĂłd.gĹ.Ăłwnego.opiekuna.)
 last_job_parent_1 <- as.character(realdata$Ostatni.zawĂłd.gĹ.Ăłwnego.opiekuna.)
 
+# Q: Wykształcenie głównego opiekuna:
+podstawowe, zawodowe, średnie, niepełne wyższe, wyższe, doktorat
 education_parent_1 <- as.factor(realdata$WyksztaĹ.cenie.gĹ.Ăłwnego.opiekuna.)
+
+# Q: W jakim kraju główny opiekun zdobył ostatni poziom swojego wykształcenia?
 education_country_parent_1 <- as.factor(realdata$W.jakim.kraju.gĹ.Ăłwny.opiekun.zdobyĹ..ostatni.poziom.swojego.wyksztaĹ.cenia.)
 
+# Q: Kraj urodzenia drugiego opiekuna:
 birth_country_parent_2 <- as.factor(realdata$Kraj.urodzenia.drugiego.opiekuna.)
 birth_region_parent_2 <- as.factor(tolower(realdata$WojewĂłdztwo.Region.urodzenia.drugiego.opiekuna.))
 birth_town_parent_2 <- as.character(tolower(realdata$MiejscowoĹ.Ä..urodzenia.drugiego.opiekuna.))
 
+# Q: Czy drugi opiekun obecnie pracuje?
+# A: tak, w pełnym wymiarze godzin; tak, w niepełnym wymiarze godzin; nie, jest na urlopie rodzicielskim; nie pracuje zawodowo
 employment_parent_2 <- as.factor(realdata$Czy.drugi.opiekun.obecnie.pracuje.)
 
+# Q: Wykonywany zawód drugiego opiekuna:
+# Q: Ostatni zawód drugiego opiekuna:
 current_job_parent_2 <- as.character(realdata$Wykonywany.zawĂłd.drugiego.opiekuna.)
 last_job_parent_2 <- as.character(realdata$Ostatni.zawĂłd.drugiego.opiekuna.)
 
+# Q: Wykształcenie drugiego opiekuna:
+# A: podstawowe, zawodowe, średnie, niepełne wyższe, wyższe, doktorat
 education_parent_2 <- as.factor(realdata$WyksztaĹ.cenie.drugiego.opiekuna.)
+
+# Q: W jakim kraju drugi opiekun zdobył ostatni poziom swojego wykształcenia?
 education_country_parent_2 <- as.factor(realdata$W.jakim.kraju.drugi.opiekun.zdobyĹ..ostatni.poziom.swojego.wyksztaĹ.cenia.)
 
+# Q: Trudności szkolne
+# A: rodzeństwo dziecka, główny opiekun, drugi opiekun, rodzina głównego opiekuna, rodzina drugiego opiekuna
 difficulties_school <- as.character(realdata$TrudnoĹ.ci.w.szkole.)
 difficulties_school_siblings <- vector()
 difficulties_school_parent_1 <- vector()
@@ -634,6 +705,18 @@ difficulties_school_parent_1 <- as.factor(difficulties_school_parent_1)
 difficulties_school_parent_1_family <- as.factor(difficulties_school_parent_1_family)
 difficulties_school_parent_2 <- as.factor(difficulties_school_parent_2)
 difficulties_school_parent_2_family <- as.factor(difficulties_school_parent_2_family)
+
+# Q: Trudności głównie z czytaniem i ortografią:
+# A: rodzeństwo dziecka, główny opiekun, drugi opiekun, rodzina głównego opiekuna, rodzina drugiego opiekuna
+# TODO
+
+# Q: Trudności ze zrozumieniem, co mówią inni:
+# A: rodzeństwo dziecka, główny opiekun, drugi opiekun, rodzina głównego opiekuna, rodzina drugiego opiekuna
+# TODO
+
+# Q: Trudności z mówieniem (wymowa, formułowanie zdań, znajdowanie właściwych słów itp.)
+# A: rodzeństwo dziecka, główny opiekun, drugi opiekun, rodzina głównego opiekuna, rodzina drugiego opiekuna
+# TODO
 
 # create and view preprocessed data
 df <- data.frame(id, date, child_id_sw, form_group, submitter, birth_date_child, birth_country_child, birth_region_child, birth_town_child, other_country_residence, residence_country_child, residence_region_child, residence_town_child, residence_date, gender, siblings, birth_order, birth_date_sibling_1, gender_sibling_1, birth_date_sibling_2, gender_sibling_2, birth_date_sibling_3, gender_sibling_3, birth_date_sibling_4, gender_sibling_4, birth_date_sibling_5, gender_sibling_5, complications, complications_info, birth_weight, age_walk, age_first_word, worries, worries_info, medical_conditions, medical_conditions_info, infections, hearing_loss, allergies, grommets, ear_infections, ear_infections_weeks, other_conditions, lang_contact, lang_1, lang_2, lang_3, freq_contact_pl, freq_contact_lang_1, freq_contact_lang_2, freq_contact_lang_3, first_contact_pl, first_contact_lang_1, first_contact_lang_2, first_contact_lang_3, parent_1, lang_parent_1_child_pl, lang_parent_1_child_lang_1, lang_parent_1_child_lang_2, lang_parent_1_child_lang_3, lang_child_parent_1_pl, lang_child_parent_1_lang_1, lang_child_parent_1_lang_2, lang_child_parent_1_lang_3, only_parent, parent_2, lang_parent_2_child_pl, lang_parent_2_child_lang_1, lang_parent_2_child_lang_2, lang_parent_2_child_lang_3, lang_child_parent_2_pl, lang_child_parent_2_lang_1, lang_child_parent_2_lang_2, lang_child_parent_2_lang_3, extra_caregivers, lang_extra_1_child_pl, lang_extra_1_child_lang_1, lang_extra_1_child_lang_2, lang_extra_1_child_lang_3, lang_child_extra_1_pl, lang_child_extra_1_lang_1, lang_child_extra_1_lang_2, lang_child_extra_1_lang_3, extra_2, lang_extra_2_child_pl, lang_extra_2_child_lang_1, lang_extra_2_child_lang_2, lang_extra_2_child_lang_3, lang_child_extra_2_pl, lang_child_extra_2_lang_1, lang_child_extra_2_lang_2, lang_child_extra_2_lang_3, lang_siblings_child_pl, lang_siblings_child_lang_1, lang_siblings_child_lang_2, lang_siblings_child_lang_3, lang_child_siblings_pl, lang_child_siblings_lang_1, lang_child_siblings_lang_2, lang_child_siblings_lang_3, lang_parent_uses, lang_family_uses, birth_country_parent_1, birth_region_parent_1, birth_town_parent_1, employment_parent_1, current_job_parent_1, last_job_parent_1, education_parent_1, education_country_parent_1, birth_country_parent_2, birth_region_parent_2, birth_town_parent_2, employment_parent_2, current_job_parent_2, last_job_parent_2, education_parent_2, education_country_parent_2, difficulties_school_siblings, difficulties_school_parent_1, difficulties_school_parent_1_family, difficulties_school_parent_2)
